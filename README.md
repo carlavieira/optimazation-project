@@ -1,1 +1,1 @@
-# optimazation-project
+# Optimization Project
