@@ -32,20 +32,16 @@ class AssembleTeamProblem(Annealer):
             a = random.randint(0, len(self.people) - 1)
         self.state[b] = self.people[a]
 
-        return self.energy() + initial_energy
+        return self.energy() - initial_energy
 
     def energy(self):
         """Calculates objective function."""
         e = 0
-        for job in self.jobs:
-            for skill_required in (demand for demand in job if demand==1):
-                for i in range(len(self.state)):
-                    e += (self.skills[self.state[i]][skill_required])*self.beta + (self.preferences[self.state[i]][job])*self.alfa
         for job, skills_required in self.jobs.items():
             for index_skills_required in range(len(skills_required)):
                 if skills_required[index_skills_required] == 1:
                     for i in range(len(self.state)):
-                        e += (self.skills[self.state[i]][index_skills_required]) * self.beta + (
+                        e -= (self.skills[self.state[i]][index_skills_required]) * self.beta + (
                             self.preferences[self.state[i]][(list(self.jobs.keys()).index(job))]) * self.alfa
         return e
 
@@ -53,7 +49,7 @@ class AssembleTeamProblem(Annealer):
 if __name__ == '__main__':
 
     alfa = 10
-    beta = 10
+    beta = 1
     team = 5
     Tmax = 25000.0  # Max (starting) temperature
     Tmin = 2.5  # Min (ending) temperature
@@ -109,4 +105,4 @@ if __name__ == '__main__':
     state, e = tsp.anneal()
 
     print("Team:", sorted(state))
-    print("Fuction:", e)
+    print("Fuction:", (-1)*e)
