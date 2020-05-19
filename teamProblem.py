@@ -45,6 +45,12 @@ class AssembleTeamProblem(Annealer):
                             self.preferences[self.state[i]][(list(self.jobs.keys()).index(job))]) * self.alfa
         return e
 
+def sumTeam(team, base):
+    sumTeam = 0
+    for member in team:
+        sumTeam += sum(base.get(member))
+    return sumTeam
+
 if __name__ == '__main__':
 
     alfa = 10
@@ -113,3 +119,5 @@ if __name__ == '__main__':
 
     print("Team:", sorted(state))
     print("Fuction:", (-1)*e)
+    print("Sum skills:", sumTeam(state, skills))
+    print("Sum preferences:", sumTeam(state, preferences))
