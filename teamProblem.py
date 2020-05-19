@@ -45,38 +45,6 @@ class AssembleTeamProblem(Annealer):
                             self.preferences[self.state[i]][(list(self.jobs.keys()).index(job))]) * self.alfa
         return e
 
-def genereteJobsSkillsMatrix(num_jobs, num_skills):
-    jobs = {}
-    for i in range(1, num_jobs+1):
-        job_key = "J"+str(i)
-        skills = []
-        for j in range(num_skills):
-            skills.append(random.randint(0, 1))
-        jobs[job_key] = skills
-    return jobs
-
-def generetePeopleSkillsMatrix(num_people, num_skills):
-    skills = {}
-    for i in range(1, num_people+1):
-        people_key = "P"+str(i)
-        skillsPerPeople = []
-        for j in range(num_skills):
-            skillsPerPeople.append(random.randint(0, 9))
-        skills[people_key] = skillsPerPeople
-    return skills
-
-
-def generetePeoplePreferenceMatrix(num_people, num_jobs):
-    preferences = {}
-    for i in range(1, num_people+1):
-        people_key = "P"+str(i)
-        jobs = []
-        for j in range(num_jobs):
-            jobs.append(random.randint(0, 9))
-        preferences[people_key] = jobs
-    return preferences
-
-
 if __name__ == '__main__':
 
     alfa = 10
@@ -124,7 +92,6 @@ if __name__ == '__main__':
 
     with open('jobsSkills.txt') as json_file:
         jobs = json.load(json_file)
-
     with open('peopleSkills.txt') as json_file:
         skills = json.load(json_file)
     with open('peoplePreference.txt') as json_file:
