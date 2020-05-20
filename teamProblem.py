@@ -117,6 +117,7 @@ if __name__ == '__main__':
     tsp.copy_strategy = "slice"
     state, e = tsp.anneal()
 
+    print()
     print("Team:", sorted(state))
     print("Fuction:", (-1)*e)
     print("Sum skills:", sumTeam(state, skills))
